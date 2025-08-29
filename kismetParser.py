@@ -202,8 +202,8 @@ class KismetParser():
             return
         try:
             with outFile.open('w') as f:
-                headings = ["MAC", "First Time", "Last Time", "Manufacturer",
-                            "Common Name", "RSSI"]
+                headings = ["MAC Address", "First Time", "Last Time",
+                            "Manufacturer", "Common Name", "RSSI"]
                 rows = []
                 for mac in self.bluetoothDevices.keys():
                     row = [mac]
@@ -245,8 +245,9 @@ class KismetParser():
             return
         try:
             with outFile.open('w') as f:
-                headings = ["MAC", "First Time", "Last Time", "Manufacturer",
-                            "Channel", "Authentication", "ESSID", "RSSI"]
+                headings = ["MAC Address", "First Time", "Last Time",
+                            "Manufacturer", "Channel", "Authentication",
+                            "ESSID", "RSSI"]
                 rows = []
                 for mac in self.wirelessAps.keys():
                     row = [mac]
@@ -290,8 +291,8 @@ class KismetParser():
             return
         try:
             with outFile.open('w') as f:
-                headings = ["MAC", "First Time", "Last Time", "Manufacturer",
-                            "BSSID", "Probed SSIDs", "RSSI"]
+                headings = ["MAC Address", "First Time", "Last Time",
+                            "Manufacturer", "BSSID", "Probed SSIDs", "RSSI"]
                 rows = []
                 for mac in self.wirelessClients.keys():
                     row = [mac]
