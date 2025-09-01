@@ -168,7 +168,7 @@ class KismetParser():
             new = self.wirelessClients[mac]
             new['firstTime'] = min(firstTime, new['firstTime'])
             new['lastTime'] = max(lastTime, new['lastTime'])
-            new['probedSsids'] = set(probedSsids + new['probedSsids'])
+            new['probedSsids'] = list(set(probedSsids + new['probedSsids']))
             new['rssi'] = rssi if abs(rssi) < abs(new['rssi']) else new['rssi']
             if manufacturer != new['manufacturer'] or bssid != new['bssid']:
                 logger.warning(f"Conflicting information for {mac}")
