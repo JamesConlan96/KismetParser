@@ -431,9 +431,9 @@ def genArgParser() -> argparse.ArgumentParser:
                         metavar="PREFIX", default="")
     return parser
 
-def main() -> None:
+def main(cliArgs: list = sys.argv) -> None:
     """Main method"""
-    if len(sys.argv) == 1:
+    if len(cliArgs) <= 1:
         genArgParser().print_usage()
         sys.exit()
     try:
