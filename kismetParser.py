@@ -80,19 +80,19 @@ class KismetParser():
             channel = int(device['kismet_device_base_channel'])
             auth = str(device['kismet_device_base_crypt'])
             essid = str(device['dot11_device'][
-                        'dot11.device.last_beaconed_ssid_record'][
-                        'dot11.advertisedssid.ssid'])
+                        'dot11_device_last_beaconed_ssid_record'][
+                        'dot11_advertisedssid_ssid'])
         except:
             logger.warning("Invalid wireless access point device record " +
                            "specified")
             return
         try:
             if str(device['kismet_device_base_signal'][
-                          'kismet.common.signal.type']).lower() == "none":
+                          'kismet_common_signal_type']).lower() == "none":
                 rssi = 5000
             else:
                 rssi = int(device['kismet_device_base_signal'][
-                                             'kismet.common.signal.max_signal'])
+                                             'kismet_common_signal_max_signal'])
         except:
             rssi = 5000
         if not mac or mac is None:
@@ -133,16 +133,16 @@ class KismetParser():
             firstTime = int(device['kismet_device_base_first_time'])
             lastTime = int(device['kismet_device_base_last_time'])
             manufacturer = str(device['kismet_device_base_manuf'])
-            bssid = str(device['dot11_device']['dot11.device.last_bssid'])
+            bssid = str(device['dot11_device']['dot11_device_last_bssid'])
             probedSsids = []
-            if "dot11.device.last_probed_ssid_record" in device['dot11_device'
+            if "dot11_device_last_probed_ssid_record" in device['dot11_device'
                                                                 ].keys():
                 if device['dot11_device'][
-                                        'dot11.device.last_probed_ssid_record'][
-                                        'dot11.probedssid.ssid']:
+                                        'dot11_device_last_probed_ssid_record'][
+                                        'dot11_probedssid_ssid']:
                     probedSsids.append(str(device['dot11_device'][
-                                        'dot11.device.last_probed_ssid_record'][
-                                        'dot11.probedssid.ssid']))
+                                        'dot11_device_last_probed_ssid_record'][
+                                        'dot11_probedssid_ssid']))
                 else:
                     probedSsids.append("Unknown SSID")
         except:
@@ -150,11 +150,11 @@ class KismetParser():
             return
         try:
             if str(device['kismet_device_base_signal'][
-                          'kismet.common.signal.type']).lower() == "none":
+                          'kismet_common_signal_type']).lower() == "none":
                 rssi = 5000
             else:
                 rssi = int(device['kismet_device_base_signal'][
-                                             'kismet.common.signal.max_signal'])
+                                             'kismet_common_signal_max_signal'])
         except:
             rssi = 5000
         if not mac or mac is None:
@@ -431,9 +431,9 @@ def genArgParser() -> argparse.ArgumentParser:
                         metavar="PREFIX", default="")
     return parser
 
-def main(cliArgs: list = sys.argv) -> None:
+def main(cliArgs: list = sys.argv[1:]) -> None:
     """Main method"""
-    if len(cliArgs) <= 1:
+    if len(cliArgs) < 1:
         genArgParser().print_usage()
         sys.exit()
     try:
